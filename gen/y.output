@@ -1,0 +1,287 @@
+
+state 0
+	$accept: .Start $end 
+
+	EVERY  shift 7
+	NEWLINE  shift 4
+	ORDINAL  shift 9
+	.  error
+
+	RecurByDay  goto 6
+	RecurByDay1  goto 8
+	RecurByTime  goto 5
+	Sched  goto 2
+	SchedLine  goto 3
+	Start  goto 1
+
+state 1
+	$accept:  Start.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	Start:  Sched.    (26)
+
+	.  reduce 26 (src line 212)
+
+
+state 3
+	Sched:  SchedLine.Sched1 
+	Sched1: .    (21)
+
+	.  reduce 21 (src line 187)
+
+	Sched1  goto 10
+
+state 4
+	SchedLine:  NEWLINE.    (23)
+
+	.  reduce 23 (src line 195)
+
+
+state 5
+	SchedLine:  RecurByTime.    (24)
+
+	.  reduce 24 (src line 199)
+
+
+state 6
+	SchedLine:  RecurByDay.    (25)
+
+	.  reduce 25 (src line 205)
+
+
+state 7
+	RecurByDay1:  EVERY.    (8)
+	RecurByTime:  EVERY.DECIMAL_DIGIT RecurByTime1 RecurByTime2 
+
+	DECIMAL_DIGIT  shift 11
+	.  reduce 8 (src line 120)
+
+
+state 8
+	RecurByDay:  RecurByDay1.Days RecurByDay2 RecurByDay3 
+
+	DAY  shift 13
+	.  error
+
+	Days  goto 12
+
+state 9
+	RecurByDay1:  ORDINAL.    (9)
+
+	.  reduce 9 (src line 125)
+
+
+state 10
+	Sched:  SchedLine Sched1.    (20)
+	Sched1:  Sched1.SchedLine 
+
+	EVERY  shift 7
+	NEWLINE  shift 4
+	ORDINAL  shift 9
+	.  reduce 20 (src line 182)
+
+	RecurByDay  goto 6
+	RecurByDay1  goto 8
+	RecurByTime  goto 5
+	SchedLine  goto 14
+
+state 11
+	RecurByTime:  EVERY DECIMAL_DIGIT.RecurByTime1 RecurByTime2 
+
+	HRS  shift 16
+	MINS  shift 17
+	SECS  shift 18
+	.  error
+
+	RecurByTime1  goto 15
+
+state 12
+	RecurByDay:  RecurByDay1 Days.RecurByDay2 RecurByDay3 
+	RecurByDay2: .    (10)
+
+	OF  shift 20
+	.  reduce 10 (src line 130)
+
+	RecurByDay2  goto 19
+
+state 13
+	Days:  DAY.Days1 
+	Days1: .    (2)
+
+	.  reduce 2 (src line 82)
+
+	Days1  goto 21
+
+state 14
+	Sched1:  Sched1 SchedLine.    (22)
+
+	.  reduce 22 (src line 191)
+
+
+state 15
+	RecurByTime:  EVERY DECIMAL_DIGIT RecurByTime1.RecurByTime2 
+	RecurByTime2: .    (18)
+
+	FROM  shift 23
+	.  reduce 18 (src line 172)
+
+	RecurByTime2  goto 22
+
+state 16
+	RecurByTime1:  HRS.    (15)
+
+	.  reduce 15 (src line 158)
+
+
+state 17
+	RecurByTime1:  MINS.    (16)
+
+	.  reduce 16 (src line 163)
+
+
+state 18
+	RecurByTime1:  SECS.    (17)
+
+	.  reduce 17 (src line 167)
+
+
+state 19
+	RecurByDay:  RecurByDay1 Days RecurByDay2.RecurByDay3 
+
+	TIME  shift 25
+	.  error
+
+	RecurByDay3  goto 24
+
+state 20
+	RecurByDay2:  OF.RecurByDay21 
+
+	MONTH  shift 28
+	.  error
+
+	Months  goto 27
+	RecurByDay21  goto 26
+
+state 21
+	Days:  DAY Days1.    (1)
+	Days1:  Days1.COMMA DAY 
+
+	COMMA  shift 29
+	.  reduce 1 (src line 76)
+
+
+state 22
+	RecurByTime:  EVERY DECIMAL_DIGIT RecurByTime1 RecurByTime2.    (14)
+
+	.  reduce 14 (src line 152)
+
+
+state 23
+	RecurByTime2:  FROM.TIME TO TIME 
+
+	TIME  shift 30
+	.  error
+
+
+state 24
+	RecurByDay:  RecurByDay1 Days RecurByDay2 RecurByDay3.    (7)
+
+	.  reduce 7 (src line 108)
+
+
+state 25
+	RecurByDay3:  TIME.    (13)
+
+	.  reduce 13 (src line 146)
+
+
+state 26
+	RecurByDay2:  OF RecurByDay21.    (11)
+
+	.  reduce 11 (src line 135)
+
+
+state 27
+	RecurByDay21:  Months.    (12)
+
+	.  reduce 12 (src line 140)
+
+
+state 28
+	Months:  MONTH.Months1 
+	Months1: .    (5)
+
+	.  reduce 5 (src line 98)
+
+	Months1  goto 31
+
+state 29
+	Days1:  Days1 COMMA.DAY 
+
+	DAY  shift 32
+	.  error
+
+
+state 30
+	RecurByTime2:  FROM TIME.TO TIME 
+
+	TO  shift 33
+	.  error
+
+
+state 31
+	Months:  MONTH Months1.    (4)
+	Months1:  Months1.COMMA MONTH 
+
+	COMMA  shift 34
+	.  reduce 4 (src line 92)
+
+
+state 32
+	Days1:  Days1 COMMA DAY.    (3)
+
+	.  reduce 3 (src line 87)
+
+
+state 33
+	RecurByTime2:  FROM TIME TO.TIME 
+
+	TIME  shift 35
+	.  error
+
+
+state 34
+	Months1:  Months1 COMMA.MONTH 
+
+	MONTH  shift 36
+	.  error
+
+
+state 35
+	RecurByTime2:  FROM TIME TO TIME.    (19)
+
+	.  reduce 19 (src line 177)
+
+
+state 36
+	Months1:  Months1 COMMA MONTH.    (6)
+
+	.  reduce 6 (src line 103)
+
+
+17 terminals, 17 nonterminals
+27 grammar rules, 37/2000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+66 working sets used
+memory: parser 22/30000
+0 extra closures
+22 shift entries, 1 exceptions
+17 goto entries
+3 entries saved by goto default
+Optimizer space used: output 36/30000
+36 table entries, 0 zero
+maximum spread: 17, maximum offset: 17

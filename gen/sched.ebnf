@@ -1,0 +1,18 @@
+decimal_digit	= .
+ordinal = .
+day    = .
+month	= .
+every = .
+hrs = .
+mins = .
+secs = .
+time = .
+comma = .
+newline = .
+Days = day { comma day } .
+Months = month { comma month }.
+RecurByTime = every decimal_digit (hrs|mins|secs)  ["from" time "to" time] .
+RecurByDay = (every|ordinal) Days ["of" (Months)] (time) .
+SchedLine = newline | RecurByTime | RecurByDay .
+Sched = SchedLine { SchedLine } .
+
