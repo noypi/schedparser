@@ -1,4 +1,4 @@
-Example:
+###Example:
 ```go
 // parses a token
 token := "every 3 secs from 06:30 to 08:30"
