@@ -10,6 +10,9 @@ ret := ParseSched(v.token, func(bytime *SchedRecurByTime, byday *SchedRecurByDay
 // RecurByDay = (every|ordinal) Days ["of" (Months)] (time) .
 
 // VALID input examples
+// "every 21 hrs"
+// "every 3 secs from 06:30 to 08:30"
+// "every 05 mins from 06:30 to 09:30"
 // "every monday 05:30"
 // "every mon 05:30"
 // "every wed 15:40"
