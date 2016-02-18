@@ -1,5 +1,9 @@
 package schedparser_test
 
+import (
+	"fmt"
+)
+
 func ExampleParseSched() {
 
 	// parses a token
@@ -7,6 +11,8 @@ func ExampleParseSched() {
 	ret := ParseSched(v.token, func(bytime *SchedRecurByTime, byday *SchedRecurByDay) {
 		// do something
 	})
+	
+	fmt.Println(token, ret)
 
 	// RecurByTime = every decimal_digit (hrs|mins|secs)  ["from" time "to" time] .
 	// RecurByDay = (every|ordinal) Days ["of" (Months)] (time) .
