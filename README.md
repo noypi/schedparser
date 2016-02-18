@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/noypi/schedparser.svg?branch=master)](https://travis-ci.org/noypi/schedparser)
+[![GoDoc](https://godoc.org/github.com/noypi/schedparser?status.png)](http://godoc.org/github.com/noypi/schedparser)
+
 ###Example:
 ```go
 // parses a token
