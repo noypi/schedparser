@@ -2,14 +2,14 @@ package schedparser_test
 
 import (
 	"fmt"
-	"github.com/noypi/schedparser"
+	. "github.com/noypi/schedparser"
 )
 
 func ExampleParseSched() {
 
 	// parses a token
 	token := "every 3 secs from 06:30 to 08:30"
-	ret := schedparser.ParseSched(token, func(bytime *schedparser.SchedRecurByTime, byday *schedparser.SchedRecurByDay) {
+	ret := ParseSched(token, func(bytime *SchedRecurByTime, byday *SchedRecurByDay) {
 		// do something
 	})
 	
