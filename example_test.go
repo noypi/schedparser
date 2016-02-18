@@ -9,7 +9,7 @@ func ExampleParseSched() {
 
 	// parses a token
 	token := "every 3 secs from 06:30 to 08:30"
-	ret := ParseSched(token, func(bytime *schedparser.SchedRecurByTime, byday *schedparser.SchedRecurByDay) {
+	ret := schedparser.ParseSched(token, func(bytime *schedparser.SchedRecurByTime, byday *schedparser.SchedRecurByDay) {
 		// do something
 	})
 	
